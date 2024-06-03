@@ -31,8 +31,8 @@ function populateTable(data) {
             <td>${item.id}</td>
             <td>${item.name}</td>
             <td>${item.email}</td>
-            <td>${item.phone}</td>
-            <td>${item.services}</td>
+            <td>${item.number}</td>
+            <td>${item.subject}</td>
             <td>${item.message}</td>
             <td>
                

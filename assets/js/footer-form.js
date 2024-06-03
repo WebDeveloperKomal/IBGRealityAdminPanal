@@ -1,5 +1,10 @@
-document.addEventListener('DOMContentLoaded', function() {
-    fetch('http://localhost:2222/auth/get-details')
+document.addEventListener('DOMContentLoaded', function () {
+    // On page load, fetch data and populate the table
+    getData();
+});
+
+function getData() {
+    fetch('http://localhost:8080/auth/get-all-footer-Contact')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -7,32 +12,83 @@ document.addEventListener('DOMContentLoaded', function() {
             return response.json();
         })
         .then(data => {
-            console.log(data); // Log the data object to inspect its structure
-            populateTable(data); // Assuming the data is already in array format
+            console.log("Data received:", data);
+            populateTable(data);
         })
         .catch(error => {
-            console.error('Error fetching data:', error);
+            console.error('Error fetching or processing data:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Failed to fetch data. Please try again later.',
+            });
         });
+}
 
-    function populateTable(data) {
-        const tableBody = document.querySelector('#dataTable tbody');
-        tableBody.innerHTML = ''; // Clear previous data
-        data.forEach(row => {
-            console.log(row); // Log each row to inspect its structure
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td style="color: #0F4229;">${row.id}</td>
-                <td style="color: #0F4229;">${row.address}</td>
-                <td style="color: #0F4229;">${row.number}</td>
-                <td style="color: #0F4229;">${row.email}</td>
-                <td style="color: #0F4229;">
-                <a href="update-Our-team.html?id=${row.id}&address=${row.address}&number=${row.number}&email=${row.email}" class="editBtn" data-id="${row.id}">Edit</a>
+function populateTable(data) {
+    const tableBody = document.getElementById('dataTableBody');
+    tableBody.innerHTML = '';
+
+    data.forEach((item, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${item.id}</td>
+            <td>${item.address}</td>
+            <td>${item.number}</td>
+            <td>${item.email}</td>
+            <td>
+                <button class="delete-btn" data-id="${item.id}">Delete</button>
             </td>
-            `;
-            tableBody.appendChild(tr);
+        `;
+        tableBody.appendChild(row);
+
+        // Add event listener for delete button inside the loop
+        const deleteBtn = row.querySelector('.delete-btn');
+        deleteBtn.addEventListener('click', () => {
+            const id = deleteBtn.getAttribute('data-id');
+            console.log("Delete button clicked for ID: " + id);
+
+            // Show SweetAlert confirmation dialog when delete button is clicked
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You won\'t be able to revert this!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If user confirms deletion, perform delete operation
+                    fetch(`http://localhost:8080/auth/delete-footer-Contact/${id}`, {
+                        method: 'DELETE'
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to delete contact');
+                        }
+                        console.log("Contact deleted successfully");
+                        // If deletion is successful, show success alert and reload the data
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Deleted!',
+                            text: 'The contact has been deleted.',
+                        });
+                        getData();
+                    })
+                    .catch(error => {
+                        console.error('Error deleting contact:', error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Failed to delete contact. Please try again later.',
+                        });
+                    });
+                }
+            });
         });
-    }
-});
+    });
+}
 
 
 
