@@ -28,6 +28,9 @@
     <link href="assets\image\Home\Logo for web_270-270 Color11111.png" rel="icon">
     <link href="assets\image\Home\Logo for web_270-270 Color11111.png" rel="apple-touch-icon">
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="assets\js\Testimonials.js"></script>
+
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
     <link
@@ -82,12 +85,12 @@
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
 
-         <!--  <div class="search-bar">
+        <!--  <div class="search-bar">
             <form class="search-form d-flex align-items-center" method="POST" action="#">
                 <input type="text" name="query" placeholder="Search" title="Enter search keyword">
                 <button type="submit" title="Search"><i class="bi bi-search"></i></button>
             </form>
-        </div> --> 
+        </div> -->
 
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
@@ -291,13 +294,13 @@
                     <span>Dashboard</span>
                 </a>
             </li>
-           
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="Testimonials.html">
                     <i class="bi bi-bar-chart"></i><span>Testimonials</span>
                 </a>
             </li>
-           
+
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="Our-team.html">
@@ -378,7 +381,9 @@
                                 <div class="card-header">
                                     <h5>Testimonial</h5>
 
-                                    <a class="btn" style="background-color: #e8f5e9; border-color: #348e38; color: #000000;" href="Testimonials-form.html"><i style="color: #348e38;"
+                                    <a class="btn"
+                                        style="background-color: #e8f5e9; border-color: #348e38; color: #000000;"
+                                        href="Testimonials-form.html"><i style="color: #348e38;"
                                             class="icofont icofont-plus"></i>Add
                                         testimonial</a>
 
@@ -397,53 +402,19 @@
 
                                 <div class="card-block table-border-style">
                                     <div class="table-responsive">
-                                        <table class="table" >
-
+                                        <table id="dataTable" class="table">
                                             <thead>
                                                 <tr>
-                                                    <th style="color: #0F4229;">sr No.</th>
-                                                    <th style="color: #0F4229;">title</th>
+                                                    <th style="color: #0F4229;">Id</th>
                                                     <th style="color: #0F4229;">Name</th>
                                                     <th style="color: #0F4229;">Designation</th>
-                                                    <th style="color: #0F4229;">Image</th>
                                                     <th style="color: #0F4229;">Comment</th>
-                                                    <th style="color: #0F4229;">Status</th>
+                                                    <th style="color: #0F4229;">Image</th>
                                                     <th style="color: #0F4229;">Action</th>
                                                 </tr>
                                             </thead>
-
-
-                                            <tbody>
-
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td style="color: #0F4229;">Team Member</td>
-                                                    <td style="color: #0F4229;">Praniket Patil</td>
-                                                    <td style="color: #0F4229;">Full stack developer</td>
-                                                    <td style="color: #0F4229;"><img class="slide_img"
-                                                            src="assets\image\Home\images.jpg">
-                                                    </td>
-                                                    <td style="color: #0F4229;">hello IBG </td>
-                                                    <td style="color: #0F4229;"><i class="bi bi-star"></i>
-                                                        <i class="bi bi-star"></i>
-                                                        <i class="bi bi-star"></i>
-                                                        <i class="bi bi-star"></i>
-                                                        <i class="bi bi-star"></i>
-                                                    </td>
-
-
-                                                    <td style="color: #0F4229;"><a href="update-testimonial.html" class="waves-effect"
-                                                            data-toggle="tooltip" data-placement="top" title=""
-                                                            data-original-title="Edit Testimonial"><i
-                                                                class="ti-pencil"></i> Edit</a>
-
-
-                                                        <a href="javascript:void(0);" class="waves-effect delete_entry"
-                                                            data-toggle="tooltip" data-placement="top" title=""
-                                                            data-original-title="Delete Testimonial" data-id="17"
-                                                            data-tabl="testimonials"><i class="ti-trash"></i> Delete</a>
-                                                    </td>
-                                                </tr>
+                                            <tbody id="dataTableBody">
+                                                <!-- Table body will be populated dynamically -->
                                             </tbody>
                                         </table>
                                     </div>

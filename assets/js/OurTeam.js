@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function getData() {
-    fetch('http://localhost:8080/auth/get-all-testimonials-list')
+    fetch('http://localhost:8080/auth/get-all-team-members-list')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -30,7 +30,6 @@ function populateTable(data) {
             <td>${item.id}</td>
             <td>${item.name}</td>
             <td>${item.designation}</td>
-            <td>${item.comment}</td>
             <td>${item.image}</td>
             <td>
                 <button class="delete-btn" data-id="${item.id}">Delete</button>
@@ -56,7 +55,7 @@ function populateTable(data) {
             }).then((result) => {
                 if (result.isConfirmed) {
                     // If user confirms deletion, perform delete operation
-                    fetch(`http://localhost:8080/auth/delete-testimonials/${id}`, {
+                    fetch(`http://localhost:8080/auth/delete-team-members/${id}`, {
                         method: 'DELETE'
                     })
                     .then(response => {
@@ -77,6 +76,52 @@ function populateTable(data) {
                     });
                 }
             });
+        });
+    });
+}
+
+
+// ******************************** CONSULTATION FORM ********************************/
+function saveForm(event) {
+    event.preventDefault(); // Prevent form submission
+
+    var consultationForm = {
+        name: document.getElementById('name').value,
+        designation : document.getElementById('designation').value,
+        // image : document.getElementById('image').value,
+    };
+
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+
+    fetch("http://localhost:8080/auth/save-team-members", {
+        method: 'POST',
+        body: JSON.stringify(consultationForm),
+        headers: headers,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(json => {
+        console.log(json);
+        Swal.fire({
+            title: 'Success!',
+            text: 'Your message has been sent successfully.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        Swal.fire({
+            title: 'Error!',
+            text: 'There was a problem sending your message.',
+            icon: 'error',
+            confirmButtonText: 'OK'
         });
     });
 }

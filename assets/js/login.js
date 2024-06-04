@@ -1,4 +1,7 @@
-function getAuthToken() {
+function getAuthToken(event) {
+    // Prevent the default form submission behavior
+    event.preventDefault();
+
     var userCredentials = {
         email: document.getElementById('email').value,
         password: document.getElementById('password').value
@@ -10,7 +13,7 @@ function getAuthToken() {
     headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/json');
 
-    fetch("http://localhost:2222/user/login", {
+    fetch("http://localhost:8080/user/login", {
         method: 'POST',
         body: JSON.stringify(userCredentials),
         headers: headers,
@@ -32,7 +35,7 @@ function getAuthToken() {
             // Store the JWT token in local storage
             localStorage.setItem('jwtToken', data.jwtToken);
             console.log('JWT token stored successfully:', data.jwtToken); 
-            alert("JWT token stored successfully:" , data.jwtToken);
+            alert("JWT token stored successfully: ");
             window.location.href = 'Dashboard.html';
         } else {
             throw new Error('Token not received or invalid.');

@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     getContactData();
     getQuoteData();
     getCommentData();
+    getData();
 });
 
 // Function to fetch contact data
@@ -62,6 +63,22 @@ function getCommentData() {
         });
 }
 
+function getData() {
+    fetch('http://localhost:8080/auth/get-all-team-members-list')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Data received:", data);
+            updateTeamMemberCount(data);
+        })
+        .catch(error => {
+            console.error('Error fetching or processing data:', error);
+        });
+}
 
 function updateContactCount(count) {
     const contactCountElement = document.getElementById('contactCount');
@@ -79,6 +96,10 @@ function updateCommentCount(count) {
     commentCountElement.textContent = count;
 }
 
+function updateTeamMemberCount(data) {
+    const count = data.length;
+    document.getElementById('teamMemberCount').textContent = `${count}`;
+}
 
 function populateContactTable(data) {
     const tableBody = document.getElementById('contactTableBody'); // Updated ID for contact table
