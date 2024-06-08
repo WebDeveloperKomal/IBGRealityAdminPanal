@@ -30,6 +30,7 @@
     <link
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
         rel="stylesheet">
+<script src="assets/js/testimonials.js"></script>
 
     <!-- Vendor CSS Files -->
     <link href="assets\css\bootstrap.min.css" rel="stylesheet">
@@ -238,39 +239,20 @@
 
                 </li> -->
 
-                <li class="nav-item dropdown pe-3">
-
+                <li class="nav-item drsopdown pe-3">
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <img src="assets/image/Home/images.jpg" alt="Profile" class="rounded-circle">
-                        <span class="d-none d-md-block dropdown-toggle ps-2">Praniket Patil</span>
-                    </a><!-- End Profile Iamge Icon -->
+                        <img src="assets/image/Home/download.jpg" alt="Profile" class="rounded-circle">
+                        <span class="d-none d-md-block dropdown-toggle ps-2"
+                            id="username-display">username-display</span>
+                    </a><!-- End Profile Image Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                        <li class="dropdown-header">
-                            <h6>Praniket Patil</h6>
-                            <span>Full Stack Developer</span>
-                        </li>
                         <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                                <i class="bi bi-person"></i>
-                                <span>My Profile</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
+                            <a class="dropdown-item d-flex align-items-center" href="#" id="sign-out">
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span>Sign Out</span>
                             </a>
                         </li>
-
                     </ul><!-- End Profile Dropdown Items -->
                 </li><!-- End Profile Nav -->
 
@@ -388,22 +370,20 @@
                                         <div class="card-block">
 
 
-                                            <form action="https://www.legaster.com/admin-panel/edit-service-category/66"
-                                                method="post" enctype="multipart/form-data">
+                                            <form method="post" onsubmit="saveForm(event)">
                                                 <input type="hidden" name="csrf_test_name"
                                                     value="096ea39265669eaff30f4bc704d6260c" />
                                                 <div class="form-group row">
                                                     <div class="col-sm-12">
                                                         <label class="col-form-label">Name</label>
-                                                        <input type="text" class="form-control" name="name">
-
+                                                        <input type="text" id="name" class="form-control" name="name">
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group row">
                                                     <div class="col-sm-12">
                                                         <label class="col-form-label">designation</label>
-                                                        <input type="text" class="form-control" name="designation">
+                                                        <input type="text" id="designation" class="form-control" name="designation">
 
                                                     </div>
                                                 </div>
@@ -413,7 +393,7 @@
                                                 <div class="form-group row">
                                                     <div class="col-sm-12">
                                                         <label class="col-form-label">Upload Image</label>
-                                                        <input type="file" class="form-control" name="image">
+                                                        <input type="file" id="image" class="form-control" name="image">
                                                     </div>
                                                 </div>
 
@@ -421,16 +401,15 @@
 
                                                 <div class="form-group row">
                                                     <div class="col-sm-12">
-                                                        <label class="col-form-label">Comment</label>
-                                                        <input type="text" class="form-control" name="comment">
+                                                        <label id="name" class="col-form-label">Comment</label>
+                                                        <input type="text" id="comment" class="form-control" name="comment">
 
                                                     </div>
                                                 </div>
                                                 
                                                 <div class="form-group row">
                                                     <div class="col-md-12">
-                                                        <a href="Testimonials.html" button
-                                                            class="btn btn-primary">Save</button></a>
+                                                        <button type="submit" class="btn btn-primary">Save</button>
                                                     </div>
                                                 </div>
 
@@ -478,6 +457,46 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    // Get the login details from localStorage
+                    var loginDetails = localStorage.getItem('loginDetails');
+            
+                    // Check if login details exist
+                    if (loginDetails) {
+                        // Parse the stored JSON string
+                        var parsedDetails = JSON.parse(loginDetails);
+                        var username = parsedDetails.username;
+            
+                        // Set the username in the HTML
+                        document.getElementById('username-display').textContent = username;
+                    } else {
+                        console.error('Login details not found in localStorage');
+                    }
+            
+                    // Add event listener for the "Sign Out" button
+                    document.getElementById("sign-out").addEventListener("click", function (event) {
+                        event.preventDefault(); // Prevent the default link behavior
+            
+                        // Remove login details and token from localStorage
+                        localStorage.removeItem('loginDetails');
+                        localStorage.removeItem('token'); // Assuming 'token' is stored separately
+            
+                        // Clear browser history and redirect to index page
+                        window.location.href = 'index.html';
+            
+                        // Add a new state to the history to prevent back navigation
+                        history.pushState(null, null, 'index.html');
+                        history.replaceState(null, null, 'index.html');
+                    });
+                });
+            
+                // Prevent back button navigation after sign out
+                window.addEventListener('popstate', function () {
+                    window.location.href = 'index.html';
+                });
+            </script>
+
     <!-- Vendor JS Files -->
     <script data-cfasync="false" src="assets\js\email-decode.min.js"></script>
     <script src="assets\js\apexcharts.min.js"></script>
@@ -499,12 +518,6 @@
         integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA=="
         data-cf-beacon='{"rayId":"8465544dad3f0e38","version":"2023.10.0","token":"68c5ca450bae485a842ff76066d69420"}'
         crossorigin="anonymous"></script>
-
-
-
-
-
-
 
 
     <script type="text/javascript" src="https://www.legaster.com/public/assets/js/jquery/jquery.min.js"></script>
@@ -594,6 +607,8 @@
 
         });
     </script>
+
+    
 
 </body>
 

@@ -44,6 +44,8 @@
     <link href="../assets/css/remixicon.css" rel="stylesheet">
     <link href="assets\css\simple-datatables.css" rel="stylesheet">
 
+    <script src="assets/js/login.js"></script>
+
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
 
@@ -220,53 +222,21 @@
                 </li> -->
 
                 <li class="nav-item drsopdown pe-3">
-
-
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <img src="assets/image/Home/images.jpg" alt="Profile" class="rounded-circle">
-                        <span class="d-none d-md-block dropdown-toggle ps-2">Praniket Patil</span>
-                    </a><!-- End Profile Iamge Icon -->
-
+                        <img src="assets/image/Home/download.jpg" alt="Profile" class="rounded-circle">
+                        <span class="d-none d-md-block dropdown-toggle ps-2"
+                            id="username-display">username-display</span>
+                    </a><!-- End Profile Image Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                        <li class="dropdown-header">
-                            <h6>Praniket Patil</h6>
-                            <span>Full Stack Developer</span>
-                        </li>
-
                         <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                                <i class="bi bi-person"></i>
-                                <span>My Profile</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <!-- <li>
-                            <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                                <i class="bi bi-question-circle"></i>
-                                <span>Need Help?</span>
-                            </a>
-                        </li> -->
-
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
+                            <a class="dropdown-item d-flex align-items-center" href="#" id="sign-out">
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span>Sign Out</span>
                             </a>
                         </li>
-
                     </ul><!-- End Profile Dropdown Items -->
                 </li><!-- End Profile Nav -->
-
             </ul>
         </nav><!-- End Icons Navigation -->
 
@@ -621,6 +591,47 @@
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    // Get the login details from localStorage
+                    var loginDetails = localStorage.getItem('loginDetails');
+            
+                    // Check if login details exist
+                    if (loginDetails) {
+                        // Parse the stored JSON string
+                        var parsedDetails = JSON.parse(loginDetails);
+                        var username = parsedDetails.username;
+            
+                        // Set the username in the HTML
+                        document.getElementById('username-display').textContent = username;
+                    } else {
+                        console.error('Login details not found in localStorage');
+                    }
+            
+                    // Add event listener for the "Sign Out" button
+                    document.getElementById("sign-out").addEventListener("click", function (event) {
+                        event.preventDefault(); // Prevent the default link behavior
+            
+                        // Remove login details and token from localStorage
+                        localStorage.removeItem('loginDetails');
+                        localStorage.removeItem('token'); // Assuming 'token' is stored separately
+            
+                        // Clear browser history and redirect to index page
+                        window.location.href = 'index.html';
+            
+                        // Add a new state to the history to prevent back navigation
+                        history.pushState(null, null, 'index.html');
+                        history.replaceState(null, null, 'index.html');
+                    });
+                });
+            
+                // Prevent back button navigation after sign out
+                window.addEventListener('popstate', function () {
+                    window.location.href = 'index.html';
+                });
+            </script>
+            
 
     <!-- Vendor JS Files -->
     <script src="assets\js\apexcharts.min.js"></script>

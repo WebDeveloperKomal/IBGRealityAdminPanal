@@ -32,10 +32,9 @@ function getAuthToken(event) {
     .then(data => {
         console.log('Data:', data);
         if (data && data.jwtToken) {
-            // Store the JWT token in local storage
-            localStorage.setItem('jwtToken', data.jwtToken);
-            console.log('JWT token stored successfully:', data.jwtToken); 
-            alert("JWT token stored successfully: ");
+            // Store the login details and JWT token in local storage
+            localStorage.setItem('loginDetails', JSON.stringify({ username: data.username}));
+            console.log('login Data stored successfully:', JSON.parse(localStorage.getItem('loginDetails'))); 
             window.location.href = 'Dashboard.html';
         } else {
             throw new Error('Token not received or invalid.');
@@ -46,3 +45,4 @@ function getAuthToken(event) {
         alert('Failed to login. Please try again.');
     });
 }
+
