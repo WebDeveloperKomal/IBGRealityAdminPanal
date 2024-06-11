@@ -68,6 +68,22 @@
     <link rel="stylesheet" type="text/css"
         href="https://www.legaster.com/public/assets/css/jquery.mCustomScrollbar.css">
 
+
+
+       <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('jwtToken');
+            if (!token) {
+                window.location.href = 'index.html'; // Redirect to login page if token is missing
+            }
+        });
+
+        function logout() {
+            localStorage.removeItem('jwtToken');
+            localStorage.removeItem('loginDetails'); // Optional: Remove other stored details
+            window.location.href = 'index.html'; // Redirect to login page after logout
+        }
+    </script>
 </head>
 
 <body>

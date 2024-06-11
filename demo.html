@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Date Range Selector</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <label class="col-form-label">From Date</label>
+                <input type="date" class="form-control" id="fromDate">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <label class="col-form-label">To Date</label>
+                <input type="date" class="form-control" id="toDate">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-12">
+                <button type="button" class="btn btn-primary" onclick="printMidpointDate()">Check</button>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-12">
+                <div id="dateRangeOutput"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function printMidpointDate() {
+            var fromDate = document.getElementById('fromDate').value;
+            var toDate = document.getElementById('toDate').value;
+
+            if (fromDate && toDate) {
+                var start = new Date(fromDate);
+                var end = new Date(toDate);
+
+                // Calculate the midpoint date
+                var midpoint = new Date((start.getTime() + end.getTime()) / 2);
+
+                // Format the date as YYYY-MM-DD
+                var formattedMidpoint = midpoint.toISOString().split('T')[0];
+
+                document.getElementById('dateRangeOutput').innerHTML = formattedMidpoint;
+            } else {
+                alert('Please select both dates.');
+            }
+        }
+    </script>
+</body>
+</html>

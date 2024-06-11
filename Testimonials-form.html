@@ -370,9 +370,9 @@
                                         <div class="card-block">
 
 
-                                            <form method="post" onsubmit="saveForm(event)">
-                                                <input type="hidden" name="csrf_test_name"
-                                                    value="096ea39265669eaff30f4bc704d6260c" />
+                                            <form method="post" onsubmit="saveForm(event)" enctype="multipart/form-data">
+                                                <!-- <input type="hidden" name="csrf_test_name"
+                                                    value="096ea39265669eaff30f4bc704d6260c" /> -->
                                                 <div class="form-group row">
                                                     <div class="col-sm-12">
                                                         <label class="col-form-label">Name</label>
@@ -393,7 +393,7 @@
                                                 <div class="form-group row">
                                                     <div class="col-sm-12">
                                                         <label class="col-form-label">Upload Image</label>
-                                                        <input type="file" id="image" class="form-control" name="image">
+                                                        <input type="file" id="imageFile" class="form-control" name="image">
                                                     </div>
                                                 </div>
 

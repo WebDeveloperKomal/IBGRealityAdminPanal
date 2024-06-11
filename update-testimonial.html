@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <!-- Option 1: Include in HTML -->
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"> -->
@@ -79,12 +80,12 @@
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
 
-         <!--   <div class="search-bar">
+        <!--  <div class="search-bar">
             <form class="search-form d-flex align-items-center" method="POST" action="#">
                 <input type="text" name="query" placeholder="Search" title="Enter search keyword">
                 <button type="submit" title="Search"><i class="bi bi-search"></i></button>
             </form>
-        </div> --> 
+        </div> -->
 
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
@@ -236,39 +237,20 @@
 
                 </li> -->
 
-                <li class="nav-item dropdown pe-3">
-
+                <li class="nav-item drsopdown pe-3">
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <img src="assets/image/Home/images.jpg" alt="Profile" class="rounded-circle">
-                        <span class="d-none d-md-block dropdown-toggle ps-2">Praniket Patil</span>
-                    </a><!-- End Profile Iamge Icon -->
+                        <img src="assets/image/Home/download.jpg" alt="Profile" class="rounded-circle">
+                        <span class="d-none d-md-block dropdown-toggle ps-2"
+                            id="username-display">username-display</span>
+                    </a><!-- End Profile Image Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                        <li class="dropdown-header">
-                            <h6>Praniket Patil</h6>
-                            <span>Full Stack Developer</span>
-                        </li>
                         <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                                <i class="bi bi-person"></i>
-                                <span>My Profile</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
+                            <a class="dropdown-item d-flex align-items-center" href="#" id="sign-out">
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span>Sign Out</span>
                             </a>
                         </li>
-
                     </ul><!-- End Profile Dropdown Items -->
                 </li><!-- End Profile Nav -->
 
@@ -288,13 +270,13 @@
                     <span>Dashboard</span>
                 </a>
             </li>
-           
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="Testimonials.html">
                     <i class="bi bi-bar-chart"></i><span>Testimonials</span>
                 </a>
             </li>
-           
+
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="Our-team.html">
@@ -350,6 +332,7 @@
 
 
 
+
     <main id="main" class="main">
 
         <div class="pagetitle">
@@ -370,7 +353,7 @@
                 <div class="main-body">
                     <div class="page-wrapper">
                         <div class="page-body">
-                            <script src="https://cdn.ckeditor.com/4.12.1/standard-all/ckeditor.js"></script>
+                            <!-- <script src="https://cdn.ckeditor.com/4.12.1/standard-all/ckeditor.js"></script> -->
                             <div class="row">
                                 <div class="col-sm-12">
                                     <!-- Basic Form Inputs card start -->
@@ -386,103 +369,68 @@
                                         <div class="card-block">
 
 
-                                            <form action="https://www.legaster.com/admin-panel/edit-service-category/66"
-                                                method="post" enctype="multipart/form-data">
-                                                <input type="hidden" name="csrf_test_name"
-                                                    value="096ea39265669eaff30f4bc704d6260c" />
-
-                                                <div class="form-group row">
-                                                    <div class="col-sm-12">
-                                                        <label class="col-form-label">Title</label>
-                                                        <input type="text" class="form-control" name="title">
-
+                                            <div class="card-block">
+                                                <form enctype="multipart/form-data">
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-12">
+                                                            <label class="col-form-label">Name</label>
+                                                            <input type="text" id="name" class="form-control"
+                                                                name="name">
+                                                        </div>
                                                     </div>
-                                                </div>
 
-                                                <div class="form-group row">
-                                                    <div class="col-sm-12">
-                                                        <label class="col-form-label">Name</label>
-                                                        <input type="text" class="form-control" name="name">
-
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-12">
+                                                            <label class="col-form-label">Designation</label>
+                                                            <input type="text" id="designation" class="form-control"
+                                                                name="designation">
+                                                        </div>
                                                     </div>
-                                                </div>
 
-
-                                                <div class="form-group row">
-                                                    <div class="col-sm-12">
-                                                        <label class="col-form-label">Designation</label>
-                                                        <input type="text" class="form-control" name="designation">
-
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-12">
+                                                            <label class="col-form-label">comment</label>
+                                                            <input type="text" id="comment" class="form-control"
+                                                                name="comment">
+                                                        </div>
                                                     </div>
-                                                </div>
 
-
-                                                <div class="form-group row">
-                                                    <div class="col-sm-12">
-                                                        <label class="col-form-label">Image1</label>
-                                                        <img class="slide_img form-control" src="#">
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-12">
+                                                            <label class="col-form-label">Upload Image</label>
+                                                            <input type="file" id="imageFile" class="form-control"
+                                                                name="imageFile">
+                                                        </div>
                                                     </div>
-                                                </div>
 
-                                                <!-- https://www.legaster.com/public/assets/images/service_category/1668278560_e0d973a644f7d48b103d.jpg -->
 
-                                                <div class="form-group row">
-                                                    <div class="col-sm-12">
-                                                        <label class="col-form-label">Upload Image</label>
-                                                        <input type="file" class="form-control" name="image">
+                                                    <div class="form-group row">
+                                                        <div class="col-md-12">
+                                                            <button type="submit"
+                                                                class="btn btn-primary">Update</button>
+                                                        </div>
                                                     </div>
-                                                </div>
-
-
-
-                                                <div class="form-group row">
-                                                    <div class="col-sm-12">
-                                                        <label class="col-form-label">Comment</label>
-                                                        <input type="text" class="form-control" name="comment">
-
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="form-group row">
-                                                    <div class="col-sm-12">
-                                                        <label class="col-form-label">Status</label>
-                                                        <input type="text" class="form-control" name="status">
-
-                                                    </div>
-                                                </div>
-
-
-
-                                                <div class="form-group row">
-                                                    <div class="col-md-12">
-                                                        <a href="Testimonials.html" button
-                                                            class="btn btn-primary">Save</button></a>
-                                                    </div>
-                                                </div>
-
-
-                                            </form>
+                                                </form>
+                                            </div>
                                         </div>
+
+
+                                        <!-- Basic Form Inputs card end -->
+
                                     </div>
-
-
-                                    <!-- Basic Form Inputs card end -->
-
                                 </div>
+                                <script>
+                                    CKEDITOR.replace('editor2', {
+                                        height: 260
+                                    });
+                                </script>
                             </div>
-                            <script>
-                                CKEDITOR.replace('editor2', {
-                                    height: 260
-                                });
-                            </script>
                         </div>
-                    </div>
 
-                    <div id="styleSelector"></div>
+                        <div id="styleSelector"></div>
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
         </div>
         </div>
@@ -505,6 +453,123 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get the login details from localStorage
+            var loginDetails = localStorage.getItem('loginDetails');
+
+            // Check if login details exist
+            if (loginDetails) {
+                // Parse the stored JSON string
+                var parsedDetails = JSON.parse(loginDetails);
+                var username = parsedDetails.username;
+
+                // Set the username in the HTML
+                document.getElementById('username-display').textContent = username;
+            } else {
+                console.error('Login details not found in localStorage');
+            }
+
+            // Add event listener for the "Sign Out" button
+            document.getElementById("sign-out").addEventListener("click", function (event) {
+                event.preventDefault(); // Prevent the default link behavior
+
+                // Remove login details and token from localStorage
+                localStorage.removeItem('loginDetails');
+                localStorage.removeItem('token'); // Assuming 'token' is stored separately
+
+                // Clear browser history and redirect to index page
+                window.location.href = 'index.html';
+
+                // Add a new state to the history to prevent back navigation
+                history.pushState(null, null, 'index.html');
+                history.replaceState(null, null, 'index.html');
+            });
+        });
+
+        // Prevent back button navigation after sign out
+        window.addEventListener('popstate', function () {
+            window.location.href = 'index.html';
+        });
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+            const name = urlParams.get('name');
+            const designation = urlParams.get('designation');
+            const comment = urlParams.get('comment');
+
+
+            if (id) {
+                fetchTeamMemberData(id);
+                // document.getElementById('name').value = name;
+                // document.getElementById('designation').value = designation;
+            }
+
+            const form = document.querySelector('form');
+            form.addEventListener('submit', event => {
+                event.preventDefault();
+                const formData = new FormData(form);
+                updateTeamMember(id, formData);
+            });
+        });
+
+        function fetchTeamMemberData(id) {
+            fetch(`http://localhost:8080/auth/update-testimonials/${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status) {
+                        document.getElementById('name').value = data.data.name;
+                        document.getElementById('designation').value = data.data.designation;
+                        document.getElementById('comment').value = data.data.comment;
+                        // Assuming you have an image preview element to show the fetched image
+                        // document.getElementById('imagePreview').src = `data:image/jpeg;base64,${data.data.image}`;
+                    } else {
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Your message has been sent successfully.',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        }
+
+        function updateTeamMember(id, formData) {
+            fetch(`http://localhost:8080/auth/update-testimonials/${id}`, {
+                method: 'PUT',
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status) {
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Your message has been sent successfully.',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        });
+                        // Optionally redirect to another page or refresh the page
+                    } else {
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Your message has been sent successfully.',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error updating data:', error);
+                });
+        }
+
+    </script>
+
     <!-- Vendor JS Files -->
     <script data-cfasync="false" src="assets\js\email-decode.min.js"></script>
     <script src="assets\js\apexcharts.min.js"></script>
@@ -526,13 +591,6 @@
         integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA=="
         data-cf-beacon='{"rayId":"8465544dad3f0e38","version":"2023.10.0","token":"68c5ca450bae485a842ff76066d69420"}'
         crossorigin="anonymous"></script>
-
-
-
-
-
-
-
 
     <script type="text/javascript" src="https://www.legaster.com/public/assets/js/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.legaster.com/public/assets/js/jquery-ui/jquery-ui.min.js"></script>

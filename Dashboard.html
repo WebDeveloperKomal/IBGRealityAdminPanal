@@ -44,10 +44,25 @@
     <link href="../assets/css/remixicon.css" rel="stylesheet">
     <link href="assets\css\simple-datatables.css" rel="stylesheet">
 
-    <script src="assets/js/login.js"></script>
+    <!-- <script src="assets/js/login.js"></script> -->
 
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('jwtToken');
+            if (!token) {
+                window.location.href = 'index.html'; // Redirect to login page if token is missing
+            }
+        });
+
+        function logout() {
+            localStorage.removeItem('jwtToken');
+            localStorage.removeItem('loginDetails'); // Optional: Remove other stored details
+            window.location.href = 'index.html'; // Redirect to login page after logout
+        }
+    </script>
 
 </head>
 
@@ -509,7 +524,7 @@
                                         <li><a cslass="dropdown-item" href="#">This Year</a></li>
                                     </ul>
                                 </div> -->
-                                <a href="Blogs.html">
+                                <a href="Comment.html">
                                     <div class="card-body">
                                         <h5 class="card-title">Blog Comment List <span>| This Year</span></h5>
 

@@ -11,7 +11,7 @@
     <meta content="" name="keywords">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
-    integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
+        integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -25,6 +25,8 @@
     <!-- Favicons -->
     <link href="assets\image\Home\Logo for web_270-270 Color11111.png" rel="icon">
     <link href="assets\image\Home\Logo for web_270-270 Color11111.png" rel="apple-touch-icon">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -80,52 +82,42 @@
                                         <p class="text-center small">Enter your personal details to create account</p>
                                     </div>
 
-                                    <form class="row g-3 needs-validation" novalidate>
+                                    <form id="registerForm" class="row g-3 needs-validation" novalidate>
                                         <div class="col-12">
-                                            <label for="yourName" class="form-label">Your Name</label>
-                                            <input type="text" name="name" class="form-control" id="yourName" required>
-                                            <div class="invalid-feedback">Please, enter your name!</div>
+                                            <label for="name" class="form-label">First Name</label>
+                                            <input type="text" name="name" class="form-control" id="name" required>
+                                            <div class="invalid-feedback">Please, enter your First name!</div>
                                         </div>
-
+                                
                                         <div class="col-12">
-                                            <label for="yourEmail" class="form-label">Your Email</label>
-                                            <input type="email" name="email" class="form-control" id="yourEmail"
-                                                required>
-                                            <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                                            <label for="lastName" class="form-label">Last Name</label>
+                                            <input type="text" name="lastName" class="form-control" id="lastName" required>
+                                            <div class="invalid-feedback">Please, enter your Last name!</div>
                                         </div>
-
+                                
                                         <div class="col-12">
-                                            <label for="yourUsername" class="form-label">Username</label>
-                                            <div class="input-group has-validation">
-                                                <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                                <input type="text" name="username" class="form-control"
-                                                    id="yourUsername" required>
-                                                <div class="invalid-feedback">Please choose a username.</div>
-                                            </div>
+                                            <label for="number" class="form-label">Mobile Number</label>
+                                            <input type="text" name="number" class="form-control" id="number" required>
+                                            <div class="invalid-feedback">Please, enter your Number!</div>
                                         </div>
-
+                                
                                         <div class="col-12">
-                                            <label for="yourPassword" class="form-label">Password</label>
-                                            <input type="password" name="password" class="form-control"
-                                                id="yourPassword" required>
+                                            <label for="email" class="form-label">Your Email</label>
+                                            <input type="email" name="email" class="form-control" id="email" required>
+                                            <div class="invalid-feedback">Please enter a valid Email address!</div>
+                                        </div>
+                                
+                                        <div class="col-12">
+                                            <label for="password" class="form-label">Password</label>
+                                            <input type="password" name="password" class="form-control" id="password" required>
                                             <div class="invalid-feedback">Please enter your password!</div>
                                         </div>
-
+                                
                                         <div class="col-12">
-                                            <div class="form-check">
-                                                <input class="form-check-input" name="terms" type="checkbox" value=""
-                                                    id="acceptTerms" required>
-                                                <label class="form-check-label" for="acceptTerms">I agree and accept the
-                                                    <a href="#">terms and conditions</a></label>
-                                                <div class="invalid-feedback">You must agree before submitting.</div>
-                                            </div>
+                                            <button class="btn  w-100" style="background-color: #ff5e15; color: #ffffff;" type="submit">Create Account</button>
                                         </div>
                                         <div class="col-12">
-                                            <button class="btn btn-primary w-100" type="submit">Create Account</button>
-                                        </div>
-                                        <div class="col-12">
-                                            <p class="small mb-0">Already have an account? <a
-                                                    href="#">Log in</a></p>
+                                            <p class="small mb-0">Already have an account? <a href="index.html">Log in</a></p>
                                         </div>
                                     </form>
 
@@ -140,9 +132,73 @@
         </div>
     </main><!-- End #main -->
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+    <a href="pages-register.html" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
+            
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            // Custom validation
+            if (this.checkValidity() === false) {
+                event.stopPropagation();
+                this.classList.add('was-validated');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Please fill out all required fields correctly!'
+                });
+                return;
+            }
+
+            // Gather form data
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => data[key] = value);
+
+            try {
+                const response = await fetch('http://localhost:8080/user/add-new-user', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                let result;
+                try {
+                    result = await response.json();
+                } catch (e) {
+                    throw new Error('Response is not valid JSON');
+                }
+
+                if (response.ok) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Account created successfully!'
+                    }).then(() => {
+                        // Redirect or reset form here if needed
+                        // For example: window.location.href = "index.html";
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: `Error: ${result.error || 'An unknown error occurred.'}`
+                    });
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: `An error occurred: ${error.message}`
+                });
+            }
+        });
+    </script>
     <!-- Vendor JS Files -->
     <script src="assets\js\apexcharts.min.js"></script>
     <script src="assets\js\bootstrap.bundle.min.js"></script>

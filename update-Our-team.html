@@ -27,6 +27,7 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <link
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
         rel="stylesheet">
@@ -236,39 +237,20 @@
 
                 </li> -->
 
-                <li class="nav-item dropdown pe-3">
-
+                <li class="nav-item drsopdown pe-3">
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <img src="assets/image/Home/images.jpg" alt="Profile" class="rounded-circle">
-                        <span class="d-none d-md-block dropdown-toggle ps-2">Praniket Patil</span>
-                    </a><!-- End Profile Iamge Icon -->
+                        <img src="assets/image/Home/download.jpg" alt="Profile" class="rounded-circle">
+                        <span class="d-none d-md-block dropdown-toggle ps-2"
+                            id="username-display">username-display</span>
+                    </a><!-- End Profile Image Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                        <li class="dropdown-header">
-                            <h6>Praniket Patil</h6>
-                            <span>Full Stack Developer</span>
-                        </li>
                         <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                                <i class="bi bi-person"></i>
-                                <span>My Profile</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
+                            <a class="dropdown-item d-flex align-items-center" href="#" id="sign-out">
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span>Sign Out</span>
                             </a>
                         </li>
-
                     </ul><!-- End Profile Dropdown Items -->
                 </li><!-- End Profile Nav -->
 
@@ -288,13 +270,13 @@
                     <span>Dashboard</span>
                 </a>
             </li>
-           
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="Testimonials.html">
                     <i class="bi bi-bar-chart"></i><span>Testimonials</span>
                 </a>
             </li>
-           
+
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="Our-team.html">
@@ -372,7 +354,7 @@
                 <div class="main-body">
                     <div class="page-wrapper">
                         <div class="page-body">
-                            <script src="https://cdn.ckeditor.com/4.12.1/standard-all/ckeditor.js"></script>
+                            <!-- <script src="https://cdn.ckeditor.com/4.12.1/standard-all/ckeditor.js"></script> -->
                             <div class="row">
                                 <div class="col-sm-12">
                                     <!-- Basic Form Inputs card start -->
@@ -386,121 +368,45 @@
                                             </div>
                                         </div>
                                         <div class="card-block">
+                                            <form enctype="multipart/form-data">
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <label class="col-form-label">Name</label>
+                                                        <input type="text" id="name" class="form-control" name="name">
+                                                    </div>
+                                                </div>
 
-                                            <form id="updateForm" action="http://localhost:2222/auth/update/1" method="post" enctype="multipart/form-data">
-                                                <input type="hidden" name="csrf_test_name" value="096ea39265669eaff30f4bc704d6260c" />
-                                            
                                                 <div class="form-group row">
                                                     <div class="col-sm-12">
-                                                        <label class="col-form-label">Id</label>
-                                                        <input type="text" class="form-control" name="id" id="id">
+                                                        <label class="col-form-label">Upload Image</label>
+                                                        <input type="file" id="imageFile" class="form-control"
+                                                            name="imageFile">
                                                     </div>
                                                 </div>
-                                            
-                                                <!-- Add other form fields similarly -->
-                                            
+
                                                 <div class="form-group row">
                                                     <div class="col-sm-12">
-                                                        <label class="col-form-label">Address</label>
-                                                        <input type="text" class="form-control" name="address" id="address">
+                                                        <label class="col-form-label">Designation</label>
+                                                        <input type="text" id="designation" class="form-control"
+                                                            name="designation">
                                                     </div>
                                                 </div>
-                                            
+
                                                 <div class="form-group row">
-                                                    <div class="col-sm-12">
-                                                        <label class="col-form-label">Email</label>
-                                                        <input type="text" class="form-control" name="email" id="email">
+                                                    <div class="col-md-12">
+                                                        <button type="submit" class="btn btn-primary">Update</button>
                                                     </div>
-                                                </div>
-                                            
-                                                <div class="form-group row">
-                                                    <div class="col-sm-12">
-                                                        <label class="col-form-label">Mobile Number</label>
-                                                        <input type="text" class="form-control" name="number" id="number">
-                                                    </div>
-                                                </div>
-                                            
-                                                <div class="text-center">
-                                                    <button type="submit" style="border-radius: 10px; background-color: #e8f5e9; color: #0f4229; border: 1px solid #000000;" class="btn btn-primary" id="updateButton">Update</button>
-                                                  <a href="Footer.html">  <button type="button" style="border-radius: 10px; background-color: #e8f5e9; color: #0f4229; border: 1px solid #000000;" class="btn btn-primary" id="cancelButton">Cancel</button></a>
                                                 </div>
                                             </form>
                                         </div>
+
                                     </div>
                                     <!-- Basic Form Inputs card end -->
 
                                 </div>
                             </div>
-                            <script>
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    // Retrieve query parameters from URL
-                                    const urlParams = new URLSearchParams(window.location.search);
-                                    const id = urlParams.get('id');
-                                    const address = urlParams.get('address');
-                                    const number = urlParams.get('number');
-                                    const email = urlParams.get('email');
-                        
-                                    // Populate form fields with the retrieved data
-                                    document.getElementById('id').value = id;
-                                    document.getElementById('address').value = address;
-                                    document.getElementById('number').value = number;
-                                    document.getElementById('email').value = email;
-                                });
-                            </script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('updateForm');
-        const updateButton = document.getElementById('updateButton');
-
-        // Function to handle form submission
-        form.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
-
-            const formData = new FormData(form); // Create FormData object with form data
-            const id = document.getElementById('id').value; // Get the id value from the form
-
-            // Store the id in local storage
-            localStorage.setItem('updateId', id);
-
-            // Make AJAX request to update API endpoint with the id value
-            fetch(`http://localhost:2222/auth/update/${id}`, { // Concatenate id into URL string
-                method: 'PUT', // Use PUT method for updating
-                body: formData // Set form data as request body
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Update successful:', data);
-                // Display success message
-                alert('Data updated successfully');
-            })
-            .catch(error => {
-                console.error('Update failed:', error);
-                // Display error message
-                alert('Failed to update data');
-            });
-        });
-
-        const cancelButton = document.getElementById('cancelButton');
-        cancelButton.addEventListener('click', function() {
-            // Handle cancel button click, if needed
-        });
-    });
-</script>
-
-                            <script>
-                                CKEDITOR.replace('editor2', {
-                                    height: 260
-                                });
-                            </script>
                         </div>
                     </div>
-
                     <div id="styleSelector"></div>
                 </div>
             </div>
@@ -526,6 +432,119 @@
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get the login details from localStorage
+            var loginDetails = localStorage.getItem('loginDetails');
+
+            // Check if login details exist
+            if (loginDetails) {
+                // Parse the stored JSON string
+                var parsedDetails = JSON.parse(loginDetails);
+                var username = parsedDetails.username;
+
+                // Set the username in the HTML
+                document.getElementById('username-display').textContent = username;
+            } else {
+                console.error('Login details not found in localStorage');
+            }
+
+            // Add event listener for the "Sign Out" button
+            document.getElementById("sign-out").addEventListener("click", function (event) {
+                event.preventDefault(); // Prevent the default link behavior
+
+                // Remove login details and token from localStorage
+                localStorage.removeItem('loginDetails');
+                localStorage.removeItem('token'); // Assuming 'token' is stored separately
+
+                // Clear browser history and redirect to index page
+                window.location.href = 'index.html';
+
+                // Add a new state to the history to prevent back navigation
+                history.pushState(null, null, 'index.html');
+                history.replaceState(null, null, 'index.html');
+            });
+        });
+
+        // Prevent back button navigation after sign out
+        window.addEventListener('popstate', function () {
+            window.location.href = 'index.html';
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+            const name = urlParams.get('name');
+            const designation = urlParams.get('designation');
+
+
+            if (id) {
+                fetchTeamMemberData(id);
+                // document.getElementById('name').value = name;
+                // document.getElementById('designation').value = designation;
+            }
+
+            const form = document.querySelector('form');
+            form.addEventListener('submit', event => {
+                event.preventDefault();
+                const formData = new FormData(form);
+                updateTeamMember(id, formData);
+            });
+        });
+
+        function fetchTeamMemberData(id) {
+            fetch(`http://localhost:8080/auth/update-team-members/${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status) {
+                        document.getElementById('name').value = data.data.name;
+                        document.getElementById('designation').value = data.data.designation;
+                        // Assuming you have an image preview element to show the fetched image
+                        // document.getElementById('imagePreview').src = `data:image/jpeg;base64,${data.data.image}`;
+                    } else {
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Your message has been sent successfully.',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        }
+
+        function updateTeamMember(id, formData) {
+            fetch(`http://localhost:8080/auth/update-team-members/${id}`, {
+                method: 'PUT',
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status) {
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Your message has been sent successfully.',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        });
+                        // Optionally redirect to another page or refresh the page
+                    } else {
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Your message has been sent successfully.',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error updating data:', error);
+                });
+        }
+
+    </script>
 
     <!-- Vendor JS Files -->
     <script data-cfasync="false" src="assets\js\email-decode.min.js"></script>
@@ -538,6 +557,8 @@
     <script src="assets\js\tinymce.min.js"></script>
     <script src="assets\js\validate.js"></script>
 
+    <script src="assets/js/OurTeam.js"></script>
+
     <!-- Template Main JS File -->
     <script src="assets\js\main.js"></script>
 
@@ -548,14 +569,6 @@
         integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA=="
         data-cf-beacon='{"rayId":"8465544dad3f0e38","version":"2023.10.0","token":"68c5ca450bae485a842ff76066d69420"}'
         crossorigin="anonymous"></script>
-
-
-
-
-
-
-
-
     <script type="text/javascript" src="https://www.legaster.com/public/assets/js/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.legaster.com/public/assets/js/jquery-ui/jquery-ui.min.js"></script>
     <script type="text/javascript" src="https://www.legaster.com/public/assets/js/popper.js/popper.min.js"></script>
@@ -587,6 +600,45 @@
     <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.html5.min.js"></script>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get the login details from localStorage
+            var loginDetails = localStorage.getItem('loginDetails');
+
+            // Check if login details exist
+            if (loginDetails) {
+                // Parse the stored JSON string
+                var parsedDetails = JSON.parse(loginDetails);
+                var username = parsedDetails.username;
+
+                // Set the username in the HTML
+                document.getElementById('username-display').textContent = username;
+            } else {
+                console.error('Login details not found in localStorage');
+            }
+
+            // Add event listener for the "Sign Out" button
+            document.getElementById("sign-out").addEventListener("click", function (event) {
+                event.preventDefault(); // Prevent the default link behavior
+
+                // Remove login details and token from localStorage
+                localStorage.removeItem('loginDetails');
+                localStorage.removeItem('token'); // Assuming 'token' is stored separately
+
+                // Clear browser history and redirect to index page
+                window.location.href = 'index.html';
+
+                // Add a new state to the history to prevent back navigation
+                history.pushState(null, null, 'index.html');
+                history.replaceState(null, null, 'index.html');
+            });
+        });
+
+        // Prevent back button navigation after sign out
+        window.addEventListener('popstate', function () {
+            window.location.href = 'index.html';
+        });
+
+
         var $window = $(window);
         var nav = $('.fixed-button');
         $window.scroll(function () {

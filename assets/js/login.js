@@ -1,5 +1,5 @@
+
 function getAuthToken(event) {
-    // Prevent the default form submission behavior
     event.preventDefault();
 
     var userCredentials = {
@@ -20,29 +20,51 @@ function getAuthToken(event) {
     })
     .then(response => {
         if (response.ok) {
-            alert("Login Successfully!");
             return response.json();
         } else if (response.status === 401) {
-            alert("Invalid Credentials");
+            Swal.fire({
+                icon: 'error',
+                title: 'Invalid Credentials',
+                text: 'Invalid credentials. Please check your username and password.',
+            });
             throw new Error('Invalid credentials. Please check your username and password.');
         } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Server Error',
+                text: 'Unexpected server error. Please try again later.',
+            });
             throw new Error('Unexpected server error. Please try again later.');
         }
     })
     .then(data => {
         console.log('Data:', data);
         if (data && data.jwtToken) {
-            // Store the login details and JWT token in local storage
-            localStorage.setItem('loginDetails', JSON.stringify({ username: data.username}));
+            localStorage.setItem('jwtToken', data.jwtToken);
+            localStorage.setItem('loginDetails', JSON.stringify({ username: data.username }));
             console.log('login Data stored successfully:', JSON.parse(localStorage.getItem('loginDetails'))); 
-            window.location.href = 'Dashboard.html';
+            Swal.fire({
+                icon: 'success',
+                title: 'Login Successfully!',
+                text: 'You will be redirected to the dashboard.',
+            }).then(() => {
+                window.location.href = 'Dashboard.html';
+            });
         } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Token Error',
+                text: 'Token not received or invalid.',
+            });
             throw new Error('Token not received or invalid.');
         }
     })
     .catch(error => {
         console.error('Error:', error);
-        alert('Failed to login. Please try again.');
+        Swal.fire({
+            icon: 'error',
+            title: 'Login Failed',
+            text: 'Failed to login. Please try again.',
+        });
     });
 }
-
